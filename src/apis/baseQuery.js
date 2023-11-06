@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { MONEY_MANAGER_SERVICE_BASE_URL } from '../constants/endpoint';
 import { tokenSelector } from '../selectors';
 
 export const baseQuery = ({
@@ -46,7 +45,7 @@ export const baseQuery = ({
 };
 
 export const baseQueryWithoutHeaders = baseQuery({
-  baseURL: MONEY_MANAGER_SERVICE_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_LINK,
   requestInterceptors: [
     (config) => {
       config.headers['Content-Type'] = 'application/json';
@@ -57,7 +56,7 @@ export const baseQueryWithoutHeaders = baseQuery({
 });
 
 export const baseQueryWithHeaders = baseQuery({
-  baseURL: MONEY_MANAGER_SERVICE_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_LINK,
   requestInterceptors: [
     (config, { api }) => {
       const token = tokenSelector(api.getState());
