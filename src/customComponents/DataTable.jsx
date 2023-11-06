@@ -25,10 +25,15 @@ const StyledTableCell = styled(TableCell)(
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
     },
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
     ...(hideOnMobile
       ? {
           [theme.breakpoints.down('sm')]: {
             display: 'none',
+            padding: 0,
           },
         }
       : {}),
@@ -58,6 +63,21 @@ const StyledTableRow = styled(TableRow)(({ theme, hideOnDesktop }) => ({
         },
       }
     : {}),
+}));
+
+const StyledPagination = styled(TablePagination)(() => ({
+  padding: 0,
+  textAlign: 'right',
+  '& .MuiTablePagination-toolbar': {
+    padding: 0,
+  },
+  '& .MuiTablePagination-input': {
+    marginRight: '1rem',
+    marginLeft: '0.5rem',
+  },
+  '& .MuiTablePagination-actions': {
+    marginLeft: 0,
+  },
 }));
 
 const DataTableRow = ({
@@ -176,7 +196,7 @@ export const DataTable = ({
   return (
     <>
       {pagination && (
-        <TablePagination
+        <StyledPagination
           component="div"
           count={data.length}
           page={page}
